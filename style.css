@@ -1,0 +1,729 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+
+  --bg: #06101d;
+  --panel: #0d2035;
+  --line: #23435f;
+
+  --cyan: #25ddff;
+  --purple: #8065ff;
+
+  --text: #ffffff;
+  --muted: #9cb1c9;
+
+}
+
+html,
+body {
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  background: var(--bg);
+
+  color: var(--text);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  touch-action: manipulation;
+
+}
+
+
+button,
+input,
+textarea {
+
+  font-family: inherit;
+
+}
+
+
+button {
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color:
+    transparent;
+
+}
+
+
+/* TOP BAR */
+
+.topbar {
+
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 7px 12px;
+
+  background: #081827;
+
+  border-bottom:
+    1px solid var(--line);
+
+}
+
+
+.topbar b {
+
+  display: block;
+
+}
+
+
+.topbar small {
+
+  display: block;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+}
+
+
+.player {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+}
+
+
+.player span {
+
+  border:
+    1px solid var(--line);
+
+  padding: 7px 10px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+}
+
+
+.player button {
+
+  border: 0;
+
+  background: #16334d;
+
+  color: white;
+
+  border-radius: 8px;
+
+  width: 36px;
+
+  height: 36px;
+
+}
+
+
+/* PAGE */
+
+.page {
+
+  width: min(900px, 100%);
+
+  height:
+    calc(100dvh - 58px);
+
+  margin: auto;
+
+  padding: 12px;
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+
+.hidden {
+
+  display: none !important;
+
+}
+
+
+/* AUTH */
+
+#loginPage {
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  overflow: auto;
+
+}
+
+
+.auth-box {
+
+  width: min(520px, 100%);
+
+  padding: 22px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #112b46,
+      #091a2c
+    );
+
+  border:
+    1px solid var(--line);
+
+  box-shadow:
+    0 15px 50px #0008;
+
+}
+
+
+.logo {
+
+  font-size: 65px;
+
+}
+
+
+.auth-box h1 {
+
+  margin: 0;
+
+  font-size: 42px;
+
+}
+
+
+.auth-box h2 {
+
+  margin-top: 5px;
+
+  color: var(--cyan);
+
+}
+
+
+.auth-box p {
+
+  color: var(--muted);
+
+}
+
+
+.auth-tabs {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 5px;
+
+  margin: 15px 0 10px;
+
+}
+
+
+.auth-tabs button {
+
+  border: 1px solid var(--line);
+
+  padding: 12px;
+
+  border-radius: 10px;
+
+  background: #0b1b2d;
+
+  color: var(--muted);
+
+  font-weight: bold;
+
+}
+
+
+.auth-tabs .active {
+
+  background:
+    linear-gradient(
+      135deg,
+      #12aeca,
+      #7656ed
+    );
+
+  color: white;
+
+}
+
+
+input {
+
+  width: 100%;
+
+  padding: 13px;
+
+  margin: 6px 0;
+
+  border-radius: 10px;
+
+  border:
+    1px solid #315473;
+
+  background: #061321;
+
+  color: white;
+
+  outline: none;
+
+}
+
+
+.primary {
+
+  width: 100%;
+
+  border: 0;
+
+  padding: 13px;
+
+  margin-top: 8px;
+
+  border-radius: 11px;
+
+  color: white;
+
+  font-weight: bold;
+
+  background:
+    linear-gradient(
+      135deg,
+      #12bddd,
+      #7656ed
+    );
+
+}
+
+
+.secondary {
+
+  width: 100%;
+
+  padding: 13px;
+
+  margin-top: 8px;
+
+  border-radius: 11px;
+
+  color: white;
+
+  background: #17324c;
+
+  border:
+    1px solid #315473;
+
+}
+
+
+.info {
+
+  margin-top: 12px;
+
+  text-align: left;
+
+  padding: 12px;
+
+  border-radius: 12px;
+
+  background: #0b2035;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  line-height: 1.7;
+
+}
+
+
+/* GAME */
+
+#gamePage {
+
+  overflow: hidden;
+
+}
+
+
+.game-header {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap: 6px;
+
+}
+
+
+.game-header div {
+
+  text-align: center;
+
+  padding: 6px;
+
+  background: #0b1d31;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 9px;
+
+}
+
+
+.game-header small {
+
+  display: block;
+
+  color: var(--muted);
+
+  font-size: 9px;
+
+}
+
+
+.game-header strong {
+
+  font-size: 15px;
+
+}
+
+
+.level-title {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 8px 2px;
+
+}
+
+
+.level-title span {
+
+  color: var(--cyan);
+
+  font-size: 12px;
+
+}
+
+
+#gameContainer {
+
+  flex: 1;
+
+  min-height: 180px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  overflow: hidden;
+
+  border:
+    2px solid #24445d;
+
+  border-radius: 14px;
+
+  background: #030911;
+
+}
+
+
+canvas {
+
+  display: block;
+
+  image-rendering: pixelated;
+
+}
+
+
+/* TOUCH CONTROLLER */
+
+.controls {
+
+  width: 190px;
+
+  height: 120px;
+
+  margin: 7px auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  grid-template-rows:
+    repeat(2,1fr);
+
+  gap: 6px;
+
+}
+
+
+.controls button {
+
+  border:
+    1px solid #315878;
+
+  border-radius: 13px;
+
+  color: white;
+
+  font-size: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #163654,
+      #0d2339
+    );
+
+}
+
+
+.controls button:active {
+
+  background: #245475;
+
+  transform: scale(.96);
+
+}
+
+
+.hint {
+
+  text-align: center;
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+}
+
+
+/* QUIZ */
+
+#quizPage,
+#resultPage {
+
+  justify-content: center;
+
+  align-items: center;
+
+  overflow: auto;
+
+}
+
+
+.quiz-box,
+.result-box {
+
+  width: min(600px,100%);
+
+  padding: 22px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #112b46,
+      #091a2c
+    );
+
+  border:
+    1px solid var(--line);
+
+}
+
+
+.quiz-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  color: var(--cyan);
+
+}
+
+
+.quiz-box h2 {
+
+  color: white;
+
+}
+
+
+.quiz-box p {
+
+  font-weight: bold;
+
+  line-height: 1.6;
+
+}
+
+
+.answer {
+
+  width: 100%;
+
+  margin: 5px 0;
+
+  padding: 12px;
+
+  text-align: left;
+
+  border-radius: 10px;
+
+  border:
+    1px solid #2a4c6b;
+
+  background: #091c30;
+
+  color: white;
+
+}
+
+
+.answer.selected {
+
+  border-color: var(--cyan);
+
+  background: #123a55;
+
+}
+
+
+#essay {
+
+  min-height: 160px;
+
+  resize: vertical;
+
+}
+
+
+#feedback {
+
+  min-height: 25px;
+
+  padding-top: 8px;
+
+  color: var(--muted);
+
+}
+
+
+.trophy {
+
+  font-size: 75px;
+
+  text-align: center;
+
+}
+
+
+.result-box {
+
+  text-align: center;
+
+}
+
+
+.result-score {
+
+  color: var(--cyan);
+
+  font-size: 28px;
+
+  font-weight: bold;
+
+  margin: 15px;
+
+}
+
+
+/* DESKTOP */
+
+@media (min-width: 700px) {
+
+  .controls {
+
+    display: none;
+
+  }
+
+}
+
+
+/* HP LANDSCAPE / SMALL */
+
+@media (max-height: 600px) {
+
+  .topbar {
+
+    height: 48px;
+
+  }
+
+  .page {
+
+    height:
+      calc(100dvh - 48px);
+
+    padding: 7px;
+
+  }
+
+  .controls {
+
+    height: 90px;
+
+  }
+
+}
