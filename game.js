@@ -136,7 +136,7 @@ function reset(){
 
 // GOOGLE SHEETS INTEGRATION
 function sendToGoogleSheets(){
-  fetch("YOUR_GOOGLE_SCRIPT_URL", {
+  fetch("https://script.google.com/macros/s/AKfycbwuMKR41aoE0rXf12rKD4jYxf9wVlHX9fyclAoXfsNfCclnvJUOxcq9RUyIuv3OMtMu6A/exec", {
     method:"POST",
     body: JSON.stringify({
       user: currentUser,
