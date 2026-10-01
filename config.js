@@ -10,7 +10,7 @@ window.GAME_CONFIG = {
      */
 
     SHEETS_API:
-        "PASTE_URL_GOOGLE_APPS_SCRIPT_DI_SINI",
+        "https://script.google.com/macros/s/AKfycbzFurb_KNlsykjsY76qpjYl7hMXY_u2RYJFVSR87Sxm99vdIlbFlyOWCp9GU_RrruJqWg/exec",
 
 
     /*
@@ -21,6 +21,6 @@ window.GAME_CONFIG = {
         "adminrpl",
 
     ADMIN_PASSWORD:
-        "SMK17Muncar2026!"
+        "smk17muncarok"
 
 };
