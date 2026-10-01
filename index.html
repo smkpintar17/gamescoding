@@ -1,41 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>RPG Story Game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPG Adventure</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
-<div id="loginBox" class="card">
-  <h2>Login / Register</h2>
-  <input id="username" placeholder="Username">
-  <input id="password" type="password" placeholder="Password">
-  <button onclick="register()">Register</button>
-  <button onclick="login()">Login</button>
-</div>
-
-<div id="game" style="display:none">
 
 <h1>🌍 RPG Adventure</h1>
 
 <div class="map">
-  <button onclick="goArea('forest')">🌲 Forest</button>
-  <button onclick="goArea('cave')">🕳️ Cave</button>
-  <button onclick="goArea('castle')">🏰 Castle</button>
+  <button onclick="startBattle('forest')">🌲 Forest</button>
+  <button onclick="startBattle('cave')">🕳️ Cave</button>
+  <button onclick="startBattle('castle')">🏰 Castle</button>
 </div>
 
-<div class="ui">
-  <p>👤 <span id="playerName"></span></p>
-  <p>❤️ HP: <span id="hp"></span></p>
-  <p>⭐ EXP: <span id="exp"></span></p>
+<!-- PLAYER & ENEMY -->
+<div class="battle">
+
+  <div class="character">
+    <img src="https://i.imgur.com/8Qf4Q0G.png">
+    <p>🧙 Player</p>
+    <p id="hp"></p>
+  </div>
+
+  <div class="character">
+    <img id="enemyImg" src="">
+    <p>👾 Enemy</p>
+    <p id="enemyHp"></p>
+  </div>
+
 </div>
 
-<h2 id="story">Pilih area untuk memulai petualangan</h2>
-<div id="answers"></div>
+<h2 id="story">Klik area untuk mulai</h2>
 
+<div class="actions">
+  <button onclick="attack()">⚔️ Attack</button>
+  <button onclick="heal()">❤️ Heal</button>
+  <button onclick="run()">🏃 Run</button>
 </div>
 
 <script src="game.js"></script>
+
 </body>
 </html>
