@@ -1,148 +1,81 @@
-// LOGIN SYSTEM
-let currentUser=null;
-
-function register(){
-  const u=document.getElementById("username").value;
-  const p=document.getElementById("password").value;
-
-  localStorage.setItem("user_"+u, JSON.stringify({password:p, hp:100, exp:0}));
-
-  alert("Register berhasil!");
-  login();
-}
-
-function login(){
-  const u=document.getElementById("username").value;
-  const p=document.getElementById("password").value;
-
-  const data=JSON.parse(localStorage.getItem("user_"+u));
-
-  if(data && data.password===p){
-    currentUser=u;
-    startGame(data);
-    localStorage.setItem("lastUser",u);
-  } else {
-    alert("Login gagal");
-  }
-}
-
-// AUTO LOGIN
-window.onload=()=>{
-  const last=localStorage.getItem("lastUser");
-  if(last){
-    const data=JSON.parse(localStorage.getItem("user_"+last));
-    currentUser=last;
-    startGame(data);
-  }
+let player = {
+  hp: 100,
+  maxHp: 100,
+  attack: 20
 };
 
-let player;
-let currentArea="";
+let enemy = null;
 
-// START GAME
-function startGame(data){
-  document.getElementById("loginBox").style.display="none";
-  document.getElementById("game").style.display="block";
-
-  player=data;
-
-  document.getElementById("playerName").innerText=currentUser;
-  updateUI();
-}
-
-// MAP AREA
-function goArea(area){
-  currentArea=area;
-
-  let storyText="";
-  let options=[];
+// START BATTLE
+function startBattle(area){
 
   if(area==="forest"){
-    storyText="🌲 Kamu masuk hutan dan bertemu monster!";
-    options=["Serang","Kabur"];
+    enemy = { hp: 50, attack: 5, img:"https://i.imgur.com/7yUvePI.png" };
   }
 
   if(area==="cave"){
-    storyText="🕳️ Kamu menemukan gua gelap...";
-    options=["Masuk","Kabur"];
+    enemy = { hp: 80, attack: 10, img:"https://i.imgur.com/3ZQ3Z8T.png" };
   }
 
   if(area==="castle"){
-    storyText="🏰 Boss besar muncul!";
-    options=["Lawan","Kabur"];
+    enemy = { hp: 120, attack: 20, img:"https://i.imgur.com/q8ZQZ9L.png" };
   }
 
-  document.getElementById("story").innerText=storyText;
+  document.getElementById("enemyImg").src = enemy.img;
 
-  const ans=document.getElementById("answers");
-  ans.innerHTML="";
+  document.getElementById("story").innerText = "⚔️ Pertarungan dimulai!";
 
-  options.forEach(opt=>{
-    const b=document.createElement("button");
-    b.innerText=opt;
-    b.onclick=()=>action(opt);
-    ans.appendChild(b);
-  });
-}
-
-// ACTION
-function action(choice){
-
-  if(choice==="Serang" || choice==="Masuk" || choice==="Lawan"){
-    fight();
-  } else {
-    document.getElementById("story").innerText="Kamu kabur...";
-  }
-}
-
-// FIGHT
-function fight(){
-  let damage=Math.floor(Math.random()*20)+5;
-  player.hp-=damage;
-
-  let gain=Math.floor(Math.random()*50)+10;
-  player.exp+=gain;
-
-  if(player.hp<=0){
-    alert("Game Over!");
-    reset();
-    return;
-  }
-
-  document.getElementById("story").innerText=
-    "⚔️ Kamu bertarung! -" + damage + " HP, +" + gain + " EXP";
-
-  saveGame();
-  sendToGoogleSheets();
   updateUI();
 }
 
-// SAVE LOCAL
-function saveGame(){
-  localStorage.setItem("user_"+currentUser, JSON.stringify(player));
+// ATTACK
+function attack(){
+  if(!enemy) return;
+
+  enemy.hp -= player.attack;
+
+  if(enemy.hp <= 0){
+    document.getElementById("story").innerText = "🎉 Musuh kalah!";
+    enemy = null;
+    return;
+  }
+
+  player.hp -= enemy.attack;
+
+  if(player.hp <= 0){
+    alert("💀 Game Over");
+    location.reload();
+  }
+
+  updateUI();
+}
+
+// HEAL
+function heal(){
+  player.hp += 20;
+  if(player.hp > player.maxHp) player.hp = player.maxHp;
+
+  if(enemy){
+    player.hp -= enemy.attack;
+  }
+
+  updateUI();
+}
+
+// RUN
+function run(){
+  enemy = null;
+  document.getElementById("story").innerText = "🏃 Kamu kabur!";
+  updateUI();
 }
 
 // UPDATE UI
 function updateUI(){
-  document.getElementById("hp").innerText=player.hp;
-  document.getElementById("exp").innerText=player.exp;
-}
+  document.getElementById("hp").innerText = "HP: " + player.hp;
 
-// RESET
-function reset(){
-  localStorage.removeItem("lastUser");
-  location.reload();
-}
-
-// GOOGLE SHEETS INTEGRATION
-function sendToGoogleSheets(){
-  fetch("https://script.google.com/macros/s/AKfycbwuMKR41aoE0rXf12rKD4jYxf9wVlHX9fyclAoXfsNfCclnvJUOxcq9RUyIuv3OMtMu6A/exec", {
-    method:"POST",
-    body: JSON.stringify({
-      user: currentUser,
-      hp: player.hp,
-      exp: player.exp,
-      area: currentArea
-    })
-  });
+  if(enemy){
+    document.getElementById("enemyHp").innerText = "HP: " + enemy.hp;
+  } else {
+    document.getElementById("enemyHp").innerText = "-";
+  }
 }
